@@ -50,8 +50,8 @@ rand(1000, 9999);
 	        <li class="dropdown">
 	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <span class="caret"></span></a>
 	          <ul class="dropdown-menu">
-	            <li><a href="#">Login</a></li>
-	            <li><a href="#">Register</a></li>
+	            <li><a href="auth/login.php">Login</a></li>
+	            <li><a href="auth/register.php">Register</a></li>
 	          </ul>
 	        </li>
 	      </ul>
