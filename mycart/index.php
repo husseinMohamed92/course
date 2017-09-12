@@ -1,6 +1,6 @@
 <?php
-
-rand(1000, 9999);
+ include_once "config/connection.php";
+ rand(1000, 9999);
 ?>
 <!DOCTYPE html>
 <html>
@@ -140,18 +140,59 @@ rand(1000, 9999);
 	</div>
 </div>
 
+<!-- Start Show Product -->
+<?php
+	
+	//no of record per page
+			$result_per_page = 10;
+			//query
+			$q = "SELECT * FROM product";
+			$qq = mysqli_query($conn,$q);
+			//number of record in database
+			$number = mysqli_num_rows($qq);
+			
+			//number of page 
+			$number_of_pages = ceil($number/$result_per_page);
+			
+			//show product
+			
+			//specify Products
+
+			if(!isset($_GET['paging'])){
+				$paging = 1;
+
+			}else{
+				$paging = $_GET['paging'];
+				
+			}
+			// show indexed pages product
+
+			$start = ($paging-1)*$result_per_page;
+				$q = "SELECT * FROM product LIMIT $start ,$result_per_page";
+
+				$qq = mysqli_query($conn,$q);
+				$real_num = mysqli_num_rows($qq);
+				
+				
+			//show pages
+			
+
+
+?>
+
 <div class="container-fluid">
 	<div class="container">
 		<div class="row">
-			<?php for ($i=0; $i < 9; $i++): ?>
+			<?php for ($i=1; $i <= $real_num; $i++): ?>
+			<?php while($res = mysqli_fetch_assoc($qq)):?>
 				<div class="col-md-3">
 					<div class="thumbnail">
 						<div class="img_wrap">
-				      	<img src="images/product.svg" />
+				      	<img src="admin/products/images/rice.jpg" />
 				      	</div>
 					      <div class="caption">
-					        <h3>The Product Title <?=$i?></h3>
-					        <p>USD 150</p>
+					        <h3>The Product Title <?=$res['pname']?></h3>
+					        <p>USD <?= $res['psalary']?></p>
 					        <p>
 					        	<a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i></a>
 					        	<a href="#" class="btn btn-default"><i class="fa fa-heart"></i></a>
@@ -160,11 +201,20 @@ rand(1000, 9999);
 					      </div>
 				    </div>	
 				 </div>
+			<?php endwhile; ?>
 			<?php endfor; ?>
 		</div>
 	</div>
+	<?php 
+
+		for($page=1;$page<=$number_of_pages;$page++){
+				echo "<a href='index.php?paging=".$page."'>".$page."</a>";
+			}
+
+	?>
 </div>
 
+<!-- End Show Product -->
 
 <div class="container-fluid">
 	<div class="container">
