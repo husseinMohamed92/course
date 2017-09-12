@@ -12,6 +12,12 @@
 	<link rel="stylesheet" type="text/css" href="plugins/owl/assets/owl.carousel.min.css">
 	<link rel="stylesheet" type="text/css" href="plugins/owl/assets/owl.theme.green.min.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<style>
+		.thumbnail{
+			width:212px;
+			height: 320px;
+		}
+	</style>
 
 </head>
 <body>
@@ -144,7 +150,7 @@
 <?php
 	
 	//no of record per page
-			$result_per_page = 10;
+			$result_per_page = 12;
 			//query
 			$q = "SELECT * FROM product";
 			$qq = mysqli_query($conn,$q);
@@ -188,7 +194,10 @@
 				<div class="col-md-3">
 					<div class="thumbnail">
 						<div class="img_wrap">
-				      	<img src="admin/products/images/rice.jpg" />
+				      	<?php 
+				      		echo "<img src='admin/products/images/".$res['pphoto']."'/>";
+
+				      	?>
 				      	</div>
 					      <div class="caption">
 					        <h3>The Product Title <?=$res['pname']?></h3>
