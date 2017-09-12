@@ -13,7 +13,7 @@
 				<div class="loginmodal-container">
 					<h1>Login to Your Account</h1><br>
 				  <form action="check.php" method="POST">
-					<input type="text" name="user" placeholder="Username">
+					<input type="text" name="user" placeholder="Username Or Email Or Name">
 					<input type="password" name="pass" placeholder="Password">
 					<input type="submit" name="login" class="login loginmodal-submit" value="Login">
 				  </form>

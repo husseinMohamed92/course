@@ -17,6 +17,30 @@
 			width:212px;
 			height: 320px;
 		}
+		.productpage{
+
+			background-color: rgba(127,127,127,.3);
+			text-align: center;
+			font-family: tahoma;
+			width: 400px;
+			padding:10px;
+			margin: auto;
+			font-weight: bold;
+		}
+		.productpage a{
+			margin: 2px;
+			font-weight: bold;
+			color:red;
+			padding: 5px;
+			opacity: .5;
+			transition: all 1s ease-in-out;
+		}
+		.productpage a:hover{
+			opacity: 1;
+			color:blue;
+
+		}
+		
 	</style>
 
 </head>
@@ -152,7 +176,7 @@
 	//no of record per page
 			$result_per_page = 12;
 			//query
-			$q = "SELECT * FROM product";
+			$q = "SELECT * FROM products";
 			$qq = mysqli_query($conn,$q);
 			//number of record in database
 			$number = mysqli_num_rows($qq);
@@ -174,7 +198,7 @@
 			// show indexed pages product
 
 			$start = ($paging-1)*$result_per_page;
-				$q = "SELECT * FROM product LIMIT $start ,$result_per_page";
+				$q = "SELECT * FROM products LIMIT $start ,$result_per_page";
 
 				$qq = mysqli_query($conn,$q);
 				$real_num = mysqli_num_rows($qq);
@@ -215,10 +239,11 @@
 		</div>
 	</div>
 	<?php 
-
+		echo "<div class='productpage'>Pages: ";
 		for($page=1;$page<=$number_of_pages;$page++){
 				echo "<a href='index.php?paging=".$page."'>".$page."</a>";
 			}
+		echo "</div>";
 
 	?>
 </div>

@@ -1,3 +1,79 @@
+<?php
+
+		if($_SERVER['REQUEST_METHOD'] == 'POST'){
+			include_once "../config/connection.php";
+			include_once "../config/functions.php";
+
+			 $name = cleanText($_POST['name']);
+			 $email = cleanText($_POST['email']);
+			 $username = cleanText($_POST['username']);
+			 $password = cleanText($_POST['password']);
+			 $confirm = cleanText($_POST['confirm']);
+
+			 if(empty($name) || empty($email) || empty($username) || empty($password) || empty($confirm)){
+			 	echo "<script> alert('You Should Fill All Fields...')</script>";
+			 	
+			 }else{
+
+			 		if(strlen($name)<3 || strlen($username)  <5){
+			 			echo "<script> alert('user and username length must be greater than 4 character')</script>";
+			 		}else{
+
+			 			if($password  != $confirm ){
+
+			 				echo "<script> alert('password doesn\'t match')</script>";
+			 			}else{
+
+			 				if(strlen($password)<8){
+			 					echo "<script> alert('password length must be at lesat  8 character')</script>";
+			 				}else{
+
+			 					// Check if this user exist before
+			 						$q = "SELECT * FROM users 
+			 								where name = '$name' 
+			 								or username = '$username'
+			 								or email = '$email'
+
+			 						";
+
+			 						$qq = mysqli_query($conn,$q);
+			 						if(mysqli_num_rows($qq) > 0 ){
+
+			 							echo "<script> alert('This User Already Exist...')</script>";
+
+			 							// End if this user exist before
+
+			 						}else{
+
+				 							// send data to database 
+
+				 					$q = "
+				 						INSERT INTO users(name,username,email,password) values('$name','$username','$email',md5('$password'))
+				 						";
+				 					$qq = mysqli_query($conn,$q);
+				 					if($qq){
+				 						echo "<script> alert('Register Succed Wait To Be Approval Soon....')</script>";
+				 						echo "Redirected To Main Page......";
+				 						header("refresh:4;url=../index.php");
+				 						// end of sending data to database
+			 						}
+			 						else{
+			 						echo "<script> alert('There Are Problem Registeration Try Again Later!!!!!!')</script>";
+			 					}
+			 				}
+
+			 				}
+			 				
+			 			}
+
+			 		}
+
+			 }
+
+		}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head> 
@@ -28,7 +104,7 @@
 	               	</div>
 	            </div> 
 				<div class="main-login main-center">
-					<form class="form-horizontal" method="post" action="#">
+					<form class="form-horizontal" method="POST" action="<?php echo ($_SERVER['PHP_SELF']) ?>">
 						
 						<div class="form-group">
 							<label for="name" class="cols-sm-2 control-label">Your Name</label>
@@ -81,7 +157,7 @@
 						</div>
 
 						<div class="form-group ">
-							<button type="button" class="btn btn-primary btn-lg btn-block login-button">Register</button>
+							<button type="submit" class="btn btn-primary btn-lg btn-block login-button">Register</button>
 						</div>
 						<div class="login-register">
 				            <a href="login.php">Login</a>
