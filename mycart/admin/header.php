@@ -1,3 +1,6 @@
+<?php
+    
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -210,7 +213,14 @@
               </div>
             </form>
           </li>
+          <!--  Display User Name -->
           <li class="nav-item">
+            <a class="nav-link" data-toggle="modal">
+              <i class="fa fa-user"></i>
+              <?php echo "welcome <span style='color:red'>". strtolower($_SESSION['name'])."<span>" ;  ?> </a>
+          </li>
+
+            <li class="nav-item">
             <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
               <i class="fa fa-fw fa-sign-out"></i>
               Logout</a>

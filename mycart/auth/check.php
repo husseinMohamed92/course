@@ -41,6 +41,11 @@
 
 
 						}if($res['type'] == 2){//adminstrator
+							$_SESSION['id'] = $res['id'];
+							$_SESSION['name']  = $res['name'];
+							echo "<script> alert('Welcome Back ".$res['name'] ."')</script>";
+							echo "Redirected To Your DashBoard:.........";
+							header("refresh:1.5;url=../admin/index.php");
 
 
 						}

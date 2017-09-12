@@ -1,4 +1,17 @@
-<?php include_once "header_inc.php"; ?>
+<?php 
+
+session_start();
+
+
+    if(isset($_SESSION['id'])){
+
+      
+
+    }else{
+      header("location:../auth/login.php");
+    }
+
+include_once "header_inc.php"; ?>
 
 
     <div class="content-wrapper py-3">
@@ -63,7 +76,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
+            <a class="btn btn-primary" href="logout.php">Logout</a>
           </div>
         </div>
       </div>
